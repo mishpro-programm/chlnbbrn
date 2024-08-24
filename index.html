@@ -134,9 +134,6 @@
 				    }
 				}
 				var xhr = new XMLHttpRequest();
-				var data = {
-					input: document.getElementById('dataInput').value
-				};
 				
 				xhr.open('POST', 'http://mishpro.serveo.net/endpoint', true);
 				xhr.setRequestHeader('Content-Type', 'application/json');
@@ -145,7 +142,7 @@
 					if (xhr.status === 200) {
 						console.log('Данные успешно отправлены!');
 					} else {
-						alert('Ошибка: ' + xhr.status);
+						console.log('Ошибка: ' + xhr.status);
 					}
 				};
 				
